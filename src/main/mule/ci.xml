@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="88b02174-1bdf-44fb-aa23-42797a242611" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="ciFlow" doc:id="fb4113e0-dfb2-4ecb-a761-d4b2d0601c90" >
+		<http:listener doc:name="Listener" doc:id="c3c79306-33d7-4a8d-9a86-31d4c5a5c989" config-ref="HTTP_Listener_config" path="/ci"/>
+		<logger level="INFO" doc:name="Logger" doc:id="f204eaa8-448a-4ae2-8c61-21593ffcdb82" message="#[payload ++ now()]"/>
+		<set-payload value="#[payload]" doc:name="Set Payload" doc:id="562ac71c-2ad1-4f19-b244-60955c8b1cab" />
+	</flow>
+</mule>
